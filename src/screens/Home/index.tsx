@@ -21,15 +21,15 @@ export function Home() {
     Alert.alert('Remove', `Remove participant ${name}?`,[
       {
         text: 'Yes',
-        onPress: () => Alert.alert('Removed')
+        onPress: () => {
+          setParticipants(prevState => prevState.filter(participant => participant !== name))
+        }
       },
       {
         text: 'Cancel',
         style: 'cancel'
       }
     ])
-
-    console.log(`Click in remove button ${name}`)
   }
 
   return (

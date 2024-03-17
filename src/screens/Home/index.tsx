@@ -5,15 +5,16 @@ import { Participant } from '../../components/Participant'
 import { styles } from './styles'
 
 export function Home() {
-  const [participants, setParticipants] = useState(['Mark Doe'])
+  const [participants, setParticipants] = useState<string[]>([])
+  const [participantName, setParticipantName] = useState('')
 
   function handleParticipantAdd() {
-    if (participants.includes('John Doe')) {
+    if (participants.includes(participantName)) {
       return Alert.alert('Participant exists', 'There is already a participant on the list with that name')
     }
 
-    setParticipants(prevState => [ ...prevState, 'John Doe'])
-    console.log('Click in add button')
+    setParticipants(prevState => [ ...prevState, participantName])
+    setParticipantName('')
   }
 
   function handleParticipantRemove(name: string) {
@@ -46,6 +47,8 @@ export function Home() {
           style={styles.input}
           placeholder="Nome do participante"
           placeholderTextColor="#6B6B6B"
+          value={participantName}
+          onChangeText={setParticipantName}
         />
         
         <TouchableOpacity style={styles.button} onPress={handleParticipantAdd}>
